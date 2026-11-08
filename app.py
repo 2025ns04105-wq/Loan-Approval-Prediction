@@ -31,7 +31,7 @@ st.write(
     "machine learning classification models."
 )
 
-st.divider()
+st.markdown("---")
 
 # --------------------------------------------------
 # LOAD TRAINED MODELS
@@ -47,7 +47,7 @@ model_files = {
     "Support Vector Machine (SVM)": "svm.pkl"
 }
 
-@st.cache_resource
+@st.experimental_singleton
 def load_models():
     loaded_models = {}
 
@@ -152,7 +152,7 @@ if uploaded_file is not None:
         # PREDICTION
         # --------------------------------------------------
 
-        if st.button("Predict Loan Approval", type="primary"):
+        if st.button("Predict Loan Approval"):
 
             predictions = selected_model.predict(X_input)
 
@@ -165,7 +165,7 @@ if uploaded_file is not None:
 
             st.subheader("3. Prediction Results")
 
-            st.dataframe(result_df, use_container_width=True)
+            st.dataframe(result_df)
 
             approved_count = int((predictions == 1).sum())
             rejected_count = int((predictions == 0).sum())
@@ -314,7 +314,7 @@ if uploaded_file is not None:
 # FOOTER
 # --------------------------------------------------
 
-st.divider()
+st.markdown("---")
 
 st.caption(
     "Loan Approval Prediction | Machine Learning "
